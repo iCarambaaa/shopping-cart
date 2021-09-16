@@ -18,9 +18,9 @@
 <div class="container-fluid">
  <div class="row">
     
-     <div class="col-9 text-center">
-        <h2>Book Shelf &#128218;</h2>
-        <h4>Category: Scifi &#x1F30C;</h4>
+     <div class="col-9 text-center p-0 pt-2">
+        <h4>Sci-Fi</h4>
+        <h2>Book Shelf  &#x1F30C; &#128218;</h2>
         <br>
         <div id="shelf" class="container-fluid d-flex flex-wrap justify-content-between my-4">
 
@@ -63,8 +63,8 @@ window.onload = () => {
          <img src="${book.img}" class="card-img-top" alt="book cover">
             <div class="card-body">
                      <h5 class="card-title">${book.title}</h5>
-                     <a href="#" onclick="addToCart()" class="btn btn-success" id="addtocart">Add To Cart</a>
-                     <a href="#" class="btn btn-secondary" id="skip">Skip</a>
+                     <a onclick="addToCart(event)" class="btn btn-success" id="addtocart">Add To Cart</a>
+                     <a onclick="skip(event)" class="btn btn-secondary" id="skip">Skip</a>
             </div>
         </div>   
         `
@@ -75,19 +75,27 @@ window.onload = () => {
   )}
 
 
-// ADD TO CART
+// ADD TO CART 
+// TODO 
 
-const addToCart = () => {
+const addToCart = (e) => {
     // let click = document.getElementById("addtocart")
    // click.onclick
-   target.closest(".card").remove()
+   let selected = e.target.closest(".card")
+   selected.classList.add("bg-success")
+   console.log(selected)
+   
 }
 
+// SKIP TITLE
 
-
-
-
-
+const skip = (e) => {
+    // let click = document.getElementById("addtocart")
+   // click.onclick
+   let selected = e.target.closest(".card")
+   selected.classList.add("d-none")
+   console.log(selected)
+}
 
     </script>
  
