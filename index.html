@@ -63,8 +63,8 @@ window.onload = () => {
          <img src="${book.img}" class="card-img-top" alt="book cover">
             <div class="card-body">
                      <h5 class="card-title">${book.title}</h5>
-                     <a href="#" class="btn btn-success">Add To Cart</a>
-                     <a href="#" class="btn btn-secondary">Skip</a>
+                     <a href="#" onclick="addToCart()" class="btn btn-success" id="addtocart">Add To Cart</a>
+                     <a href="#" class="btn btn-secondary" id="skip">Skip</a>
             </div>
         </div>   
         `
@@ -78,7 +78,9 @@ window.onload = () => {
 // ADD TO CART
 
 const addToCart = () => {
-
+    // let click = document.getElementById("addtocart")
+   // click.onclick
+   target.closest(".card").remove()
 }
 
 
