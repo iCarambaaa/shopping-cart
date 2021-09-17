@@ -46,6 +46,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script>
 
+let collection = []
+
 window.onload = () => {
 
     fetch('https://striveschool-api.herokuapp.com/books')
@@ -53,16 +55,19 @@ window.onload = () => {
   .then(data => { 
         console.log(data);
 
+       
+
         data.forEach(book => {
         
         let parent = document.getElementById("shelf")
         let child = document.createElement("div")
 
         child.innerHTML = `
-        <div class="card" style="max-width: 250px; max-heigth: 400px;">
+        <div class="card" id="${book.asin}" style="max-width: 250px; max-heigth: 400px;">
          <img src="${book.img}" class="card-img-top" alt="book cover">
             <div class="card-body">
                      <h5 class="card-title">${book.title}</h5>
+                     <p class="card-text"><class="text-muted">${book.price}$</small></p>
                      <a onclick="addToCart(event)" class="btn btn-success" id="addtocart">Add To Cart</a>
                      <a onclick="skip(event)" class="btn btn-secondary" id="skip">Skip</a>
             </div>
@@ -70,34 +75,71 @@ window.onload = () => {
         `
 
         parent.appendChild(child)
-    });
+
+        let singleBook = {  
+          asin: `${book.asin}`,
+          img: `${book.img}`,
+          title: `${book.title}`,
+          price: `${book.price}`
+        }
+        collection.push(singleBook)
+
+    }); console.log(collection)
     }
   )}
 
 
 // ADD TO CART 
-// TODO 
+// TODO !!!
 
 const addToCart = (e) => {
-    // let click = document.getElementById("addtocart")
-   // click.onclick
+
    let selected = e.target.closest(".card")
-   selected.classList.add("bg-success")
-   console.log(selected)
+   selected.classList.add("text-success", "border-success")
+   let id = selected.id
+   console.log(id)
+
+   collection.asin.find(id)
+  
+  
+   let child = document.createElement("div")
+   let parent = document.getElementById("cart")
+   child.innerHTML = `
+   <div class="card border-info mb-3" id="${id}">
+  <div class="card-body text-info">
+    <h5 class="card-title">coming soon</h5>
+    <p class="card-text">Price ... $.</p>
+    <a onclick="deleteFromCart(event)" class="btn btn-danger">delete</a>
+ 
+  </div>
+</div>
    
+   `
+   console.log(child)
+parent.appendChild(child)
+
 }
 
 // SKIP TITLE
 
 const skip = (e) => {
-    // let click = document.getElementById("addtocart")
-   // click.onclick
+
    let selected = e.target.closest(".card")
    selected.classList.add("d-none")
    console.log(selected)
 }
 
+
+// <!-- DELETE FROM CART -->
+
+const deleteFromCart = (e) => {
+    let selected = e.target.closest(".card").remove()
+
+}
+
+
     </script>
  
   </body>
 </html>
+
