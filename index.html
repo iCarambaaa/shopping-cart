@@ -90,7 +90,7 @@ window.onload = () => {
 
 
 // ADD TO CART 
-// TODO !!!
+
 
 const addToCart = (e) => {
 
@@ -99,25 +99,26 @@ const addToCart = (e) => {
    let id = selected.id
    console.log(id)
 
-   collection.asin.find(id)
   
-  
+  let rightOne = collection.find(elem => elem.asin == selected.id)
+console.log(rightOne)
+
    let child = document.createElement("div")
    let parent = document.getElementById("cart")
    child.innerHTML = `
-   <div class="card border-info mb-3" id="${id}">
+   <div class="card border-info mb-3" id="${rightOne.asin}" style="width: 300px">
   <div class="card-body text-info">
-    <h5 class="card-title">coming soon</h5>
-    <p class="card-text">Price ... $.</p>
+    <h5 class="card-title">${rightOne.title}</h5>
+    <p class="card-text">Price: ${rightOne.price}$.</p>
     <a onclick="deleteFromCart(event)" class="btn btn-danger">delete</a>
  
   </div>
 </div>
    
    `
-   console.log(child)
-parent.appendChild(child)
-
+    console.log(child)
+    parent.appendChild(child)
+    // console.log(collection)
 }
 
 // SKIP TITLE
@@ -136,6 +137,12 @@ const deleteFromCart = (e) => {
     let selected = e.target.closest(".card").remove()
 
 }
+
+
+// SEARCH BAR
+// TODO !!!
+
+
 
 
     </script>
